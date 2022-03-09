@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+/*Root elementos raiz de uma arvore de elementos, onde todos os outros elementos devem ser descendentes desse elemento*/
+:root{
+  --bg: #1e202a;
+  --bg-top: #1f212e;
+  --card: #252a41;
+  --card-hover: #333a5b;
+  --primary-font: #8b97c6;
+  --secondary-font: white;
+}
+
+[dark-theme=dark] {
+    --bg: white;
+    --bg-top: #f5f7ff;
+    --card: #f0f2fa;
+    --card-hover: #cbd2ed;
+    --primary-font: #63687e;
+    --secundary-font: #1e202a;
+}
+/*Redering prove informaçoes para o mecanismo de redenrizaçao sobre o que otimizar no momento em que ele renderiza o texto(optimizeLegibility é bastante usado pq habilita ligaduras "ff,fi,fl,etc" para algumas fontes com o texto menor*/
+html{
+    font-size: 14px;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    --webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
+/*Customizaçao do body*/
+/*Relative determina que o elemento será posicionado de acordo com o fluxo naturall da pagina*/
+body{
+    background: linear-gradient(180deg, var(--bg-top) 25%, var(--bg) 25%);
+    color: var(--secundary-font);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+/*o media deixa a apresentaçao do conteudo adaptado a uma gama especifica de dispositivos nao precisando mudar o conteudo em si*/
+@media only screen and (max-width: 425px){
+    body{
+        background: linear-gradient(180deg, var(--bg-top) 30%, var(--bg) 30%);
+    }
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: var(--secondary-font);
+}
+
+h1{
+    font-size: 4rem;
+}
+
+h3{
+    font-size: 2.5rem;
+}
+
+.followers-text{
+    text-transform: uppercase;
+    letter-spacing: 0.4rem;
+    color: var(--primary-font);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.overview{
+    max-width: 80%;
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+/*RODAPÉ*/
+footer{
+    text-align: center;
+    font-size: 11px;
+    margin: 2rem;
+}
+
+footer a{
+    color: #3e52a3;
+}
+/*Class do titulo e do modo escuro*/
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem 0;
+    max-width: 80%;
+}
+
+.container span{
+    color: var(--primary-font);
+}
+
+.container .toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .checkbox-toggle{
+    margin-left: 10px;
+}
+
+.container .theme-switch{
+    display: inline-block;
+    height: 25px;
+    position: relative;
+    width: 50px;
+}
+
+.container, .theme-switch input{
+    display: none;
+}
+/*Absolute indica que o elemeto ficará em uma posiçao fixa em relaçao a pagina*/
+.container .slider{
+    background: linear-gradient(to right, #378fe6, #3eda82);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.4s;
+}
+/*Objetos inseridos usando a prioridade content são elementos substituidos anonimos*/
+.container .slider:before{
+    background-color: #1e202a;
+    bottom: 4px;
+    content: "";
+    height: 18px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 18px;
+}
+
+.container input:checked  + .slider {
+    background: #aeb3cb;
+}
+
+.container input:checked + .slider:before{
+    transform: translateX(26px)
+}
+
+.container .slider .round{
+    border-radius: 34px;
+}
+
+.container .slider .round:before{
+    border-radius: 50%;
+}
+
+@media only screen and(max-width: 425px){
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 0 auto;
+    }
+/*Titulo da pagina*/
+    .title{
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--card-hover);
+        width: 100%;
+    }
+/*Grid diferente do flex nos permite configurar layouts em duas dimensoes (linhas e colunas) a junção das linhas e colunas formam uma grade*/
+    .toggle{
+        padding-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .toggle .checkbox-toggle{
+        justify-self: end;
+        margin-left: 180px;
+    }
+}
+/*Cartoes principais*/
+.card{
+    background-color: var(--card);
+    height: 250px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*Cartoes menores*/
+.card-small{
+    height: 120px;
+    background-color: var(--card);
+    padding: 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: grid;
+    grid-gap: 1rem;
+    text-align: justify;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card-small span{
+    color: var(--primary-font);
+}
+
+.card-small .social-icon{
+    justify-self: end;
+}
+
+.card-small .float-right{
+    justify-self: end;
+}
+
+.card:hover, .card-small:hover{
+    background-color: var(--card-hover);
+}
+
+.card-fb{
+    border-top: 5px solid #198ff5;
+}
+
+.card-tw{
+    border-top: 5px solid #1ca0f2;
+}
+
+.card-ig::after{
+    position: absolute;
+    background: linear-gradient(to right, #fdc468, #df4996);
+    top: -5px;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    content: "";
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.card-yt{
+    border-top: 5px solid #c4032a;
+}
+
+.cards-square, .card-rectangle{
+    max-width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+/*contagem*/
+.count{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*Links sociais e os resultados ganhos e perdas no dia*/
+.social-link, .gained-today, .gained-today-fall{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+.social-link img, .gained-today img, .gained-today-fall img{
+    margin-right: 5px;
+}
+
+.social-link{
+    color: var(--primary-font);
+}
+
+.gained-today{
+    color: #1db489;
+}
+
+.gained-today-fall{
+    color: #dc414c;
+}
